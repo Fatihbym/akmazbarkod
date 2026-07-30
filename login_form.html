@@ -1,0 +1,37 @@
+<form method="POST" action="https://b2c.bymyazilim.com/giris-yap" id="loginForm">
+                        <input type="hidden" name="_token" value="weHnHPvmfA7g1QPK9q3NY0pdXN24M42HnWgv3C9z" autocomplete="off">                        <!-- Honeypot -->
+                        <div style="display:none;" aria-hidden="true">
+                            <input type="text" name="phone_ext" id="login_phone_ext" tabindex="-1" autocomplete="off">
+                            <input type="text" name="website_url" id="login_website_url" tabindex="-1" autocomplete="off">
+                        </div>
+                        <div class="modern-form-group">
+                            <label for="login_email">E-Posta</label>
+                            <div class="input-icon-wrapper">
+                                <i class="fa fa-envelope"></i>
+                                <input type="email" class="modern-form-control" id="login_email" name="email" 
+                                    placeholder="ornek@email.com" required autofocus autocomplete="username"
+                                    value="">
+                            </div>
+                        </div>
+                        
+                        <div class="modern-form-group">
+                            <label for="login_password">Şifre</label>
+                            <div class="input-icon-wrapper" style="position: relative;">
+                                <i class="fa fa-lock"></i>
+                                <input type="password" class="modern-form-control" id="login_password" name="password" 
+                                    placeholder="••••••••" required autocomplete="current-password" style="padding-right: 40px;">
+                                <i class="fa fa-eye toggle-password" id="toggleLoginPassword" style="position: absolute; right: 15px; left: auto; top: 50%; transform: translateY(-50%); cursor: pointer; color: #888;"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="remember" name="remember" 
+                                    >
+                                <label class="form-check-label" for="remember">Beni hatırla</label>
+                            </div>
+                            <a href="https://b2c.bymyazilim.com/sifremiunuttum" class="forgot-link">Şifremi Unuttum</a>
+                        </div>
+                        
+                        <button type="submit" class="modern-auth-btn btn-login-theme">Giriş Yap</button>
+                    </form>
