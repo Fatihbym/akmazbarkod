@@ -1,13 +1,10 @@
 name: akmazbarkod
-description: "A new Flutter project."
-
+description: ""
 publish_to: 'none'
-
-version: 1.0.0+1
+version: 2.0.0+2
 
 environment:
   sdk: ^3.12.2
-
 
 dependencies:
   flutter:
@@ -20,6 +17,7 @@ dependencies:
   flutter_native_splash: ^2.4.8
   webview_flutter_android: 3.16.4
   url_launcher: 6.3.0
+  app_tracking_transparency: ^2.0.4
 
 dev_dependencies:
   flutter_test:
@@ -28,18 +26,18 @@ dev_dependencies:
   flutter_lints: ^6.0.0
   flutter_launcher_icons: ^0.14.4
   image: ^4.9.1
+
 flutter:
-
-
   uses-material-design: true
-
   assets:
     - assets/images/icon.png
+    - assets/images/icon_adaptive.png
 
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
   image_path: "assets/images/icon.png"
+  remove_alpha_ios: true
   min_sdk_android: 21
   adaptive_icon_background: "#FFFFFF"
   adaptive_icon_foreground: "assets/images/icon_adaptive.png"

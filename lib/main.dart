@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'services/auth_service.dart';
 import 'webview_screen.dart';
 
@@ -9,6 +10,16 @@ void main() async {
 
   final authService = AuthService();
   await authService.init();
+
+  // App Tracking Transparency (ATT) İzni İsteme
+  try {
+    final status = await AppTrackingTransparency.trackingAuthorizationStatus;
+    if (status == TrackingStatus.notDetermined) {
+      await AppTrackingTransparency.requestTrackingAuthorization();
+    }
+  } catch (e) {
+    debugPrint("ATT Error: $e");
+  }
 
   runApp(const MyApp());
 }
