@@ -67,6 +67,6 @@
 			<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		</array>
 		<key>NSUserTrackingUsageDescription</key>
-		<string>Sizlere daha kişiselleştirilmiş bir alışveriş deneyimi ve uygun içerikler sunabilmek için izinlerinizi kullanıyoruz.</string>
+		<string>We use your data to deliver a personalized shopping experience, tailored recommendations, and relevant content.</string>
 	</dict>
 </plist>

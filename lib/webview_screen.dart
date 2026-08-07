@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'services/auth_service.dart';
 import 'widgets/auth_bottom_sheet.dart';
 
@@ -47,12 +48,16 @@ class _WebViewScreenState extends State<WebViewScreen> {
             if (_isFirstLoad) {
               FlutterNativeSplash.remove();
               _isFirstLoad = false;
+              _checkATTAndHandleCookies();
+            } else {
+              _handleCookiesIfATTDenied();
             }
           },
           onWebResourceError: (WebResourceError error) {
             if (_isFirstLoad) {
               FlutterNativeSplash.remove();
               _isFirstLoad = false;
+              _checkATTAndHandleCookies();
             }
           },
           onNavigationRequest: (NavigationRequest request) async {
@@ -205,5 +210,51 @@ class _WebViewScreenState extends State<WebViewScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> _checkATTAndHandleCookies() async {
+    try {
+      TrackingStatus status = await AppTrackingTransparency.trackingAuthorizationStatus;
+      if (status == TrackingStatus.notDetermined) {
+        // WebView açıldıktan hemen sonra izin diyaloğunu göster
+        await Future.delayed(const Duration(milliseconds: 300));
+        status = await AppTrackingTransparency.requestTrackingAuthorization();
+      }
+
+      // Kullanıcı takip iznini reddettiyse (denied / restricted)
+      if (status == TrackingStatus.denied || status == TrackingStatus.restricted) {
+        _rejectAndRemoveCookieBanner();
+      }
+    } catch (e) {
+      debugPrint("ATT Error: $e");
+    }
+  }
+
+  Future<void> _handleCookiesIfATTDenied() async {
+    try {
+      final status = await AppTrackingTransparency.trackingAuthorizationStatus;
+      if (status == TrackingStatus.denied || status == TrackingStatus.restricted) {
+        _rejectAndRemoveCookieBanner();
+      }
+    } catch (e) {
+      debugPrint("ATT Check Error: $e");
+    }
+  }
+
+  void _rejectAndRemoveCookieBanner() {
+    const jsCode = """
+      (function() {
+        var rejectBtn = document.getElementById('cookieReject');
+        if (rejectBtn) {
+          rejectBtn.click();
+        }
+        var banner = document.getElementById('cookieBanner');
+        if (banner) {
+          banner.style.display = 'none';
+          banner.remove();
+        }
+      })();
+    """;
+    controller.runJavaScript(jsCode);
   }
 }
