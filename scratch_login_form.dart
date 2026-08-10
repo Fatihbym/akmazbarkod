@@ -36,7 +36,7 @@ void main() {
 
   parseAndAdd(current, false);
   parseAndAdd(incoming, true);
-
   final merged = cookiesMap.entries.map((e) => '${e.key}=${e.value}').join('; ');
+  // ignore: avoid_print
   print("Merged: $merged");
 }

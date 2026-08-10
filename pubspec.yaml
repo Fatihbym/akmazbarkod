@@ -1,7 +1,7 @@
 name: akmazbarkod
 description: ""
 publish_to: 'none'
-version: 3.0.0+3
+version: 4.0.0+4
 
 environment:
   sdk: ^3.12.2
@@ -17,7 +17,6 @@ dependencies:
   flutter_native_splash: ^2.4.8
   webview_flutter_android: 3.16.4
   url_launcher: 6.3.0
-  app_tracking_transparency: ^2.0.4
 
 dev_dependencies:
   flutter_test:
